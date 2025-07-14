@@ -1145,6 +1145,15 @@ body {
             font-size: 0.9rem;
         }
 
+        @media only screen and (max-width: 767px) {
+  .item.open {
+    min-width: 17vh;
+    max-height: 19vh;
+  }
+  .wrapper{
+    max-height: 30vh;
+  }
+}
         /* Responsive Design */
 @media (max-width: 768px) {
             .education-grid {
@@ -3151,12 +3160,23 @@ body {
       }
     );
 }
-document.addEventListener('contextmenu', event => event.preventDefault());
-		document.addEventListener('keydown', (event) => {
-		  if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'a' || event.key === 'c')) {
-			event.preventDefault();
-		  }
-		});
+const items = document.querySelectorAll('.item');
+items.forEach(item => {
+  item.addEventListener('click', function() {
+    item.classList.toggle('open');
+  });
+});
+feather.replace();
+
+ document.querySelectorAll('.item').forEach(item => {
+    item.addEventListener('click', () => {
+      // Remove 'open' class from all items
+      document.querySelectorAll('.item').forEach(i => i.classList.remove('open'));
+      
+      // Add 'open' to the clicked item
+      item.classList.add('open');
+    });
+  });
 
 </script>
 </html>

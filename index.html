@@ -2631,15 +2631,15 @@ body {
                 </div>
                 <form class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <input type="text" placeholder="Your Name" id="uf-iname" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <input type="email" placeholder="Your Email" id="uf-imail" required>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <textarea placeholder="Your Message" rows="5" id="uf-itextarea" required></textarea>
                     </div>
-<button type="submit" class="btn btn-primary contact-btn">
+<button type="submit" class="btn btn-primary contact-btn" onclick="send()">
                         <span class="btn-text">Send Message</span>
                         <span class="btn-icon">✉️</span>
                     </button>
@@ -3122,6 +3122,41 @@ body {
     });
   });
 
+
+
+  function send(){
+    var name = document.getElementById("uf-iname").value;
+    var gmail = document.getElementById("uf-imail").value;
+    var message = document.getElementById("uf-itextarea").value;
+    var bd = "Name: "+ name + "<br/>Gmail: " + gmail + "<br/>Message: " + message;
+    console.log(bd);
+    if(name=="" || gmail=="" || message==""){
+      swal("Error!", "Something went Wrong!", "error");
+      return;
+    }
+    Email.send({
+        SecureToken : "5ac10143-b1e6-49e8-a420-480a077b867f",
+        To : 'webmailsoftabish@gmail.com',
+        From : "webmailsoftabish@gmail.com",
+        Subject : "This is the subject",
+        Body : bd
+    }).then(
+      message => {
+        if(message=='OK'){
+            swal("Submitted!", "You Feedback Submitted Successfully", "success");
+        }
+        else{
+            swal("Error!", "Something went Wrong!", "error");
+        }
+      }
+    );
+}
+document.addEventListener('contextmenu', event => event.preventDefault());
+		document.addEventListener('keydown', (event) => {
+		  if (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'a' || event.key === 'c')) {
+			event.preventDefault();
+		  }
+		});
 
 </script>
 </html>
